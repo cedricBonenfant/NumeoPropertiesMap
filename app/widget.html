@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script src="https://live.zwidgets.com/js-sdk/1.0.5/ZohoEmbededAppSDK.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function getPriceMax() {
+      let priceMax = document.forms["filter"]["priceMax"].value;
+      return priceMax
+    }
+
+    function getPriceMin() {
+      let priceMin = document.forms["filter"]["priceMin"].value;
+      return priceMin
+    }
+  </script>
+</head>
+
+<body>
+  <form name="filter" action="/app/js/app.js"
+    onsubmit="return filterBuilding(getPriceMin(),getPriceMax(),ownershipType.value,singleFamilyHome.checked,condoApartment.checked,loftStudio.checked,intergenerational.checked,mobileHome.checked,hobbyFarm.checked,cottage.checked,lot.checked,
+    bedroomNumber.value,bathroomNumber.value,parkingNumber.value,garageNumber.valuem,piscine.checked,elevator.checked,adaptedMobility.checked,waterfront.checked,waterfrontAccess.checked,navigable.checked,resort.checked,furnished.checked,semiFurnished.checked,
+    bungalow.checked,splitLevel.checked,semiDetached.checked,newConstruction.checked,centuryHistoric.checked,moreThanOneStory.checked,detached.checked,tenYearsOrLess.checked)"
+    method="post">
+    <label for="priceMin">Prix minimum:</label><br>
+    <input type="text" id="priceMin" name="priceMin" value="1"><br>
+    <label for="priceMax">Prix Maximum:</label><br>
+    <input type="text" id="priceMax" name="priceMax" value="500000"><br><br>
+    <label for="ownershipType">vendre/louer:</label>
+    <select name="ownershipType" id="ownershipType" form="filter">
+      <option value="sell">à vendre</option>
+      <option value="buy">à louer</option>
+    </select>
+    <p>type de propriété</p>
+    <div><input type="checkbox" id="singleFamilyHome" name="singleFamilyHome">
+      <label for="singleFamilyHome">Maison unifamiliale</label></div>
+    <div><input type="checkbox" id="condoApartment" name="condoApartment">
+      <label for="condoApartment">Condo / Appartement</label></div>
+    <div><input type="checkbox" id="loftStudio" name="loftStudio">
+      <label for="loftStudio">Loft / Studio</label></div>
+    <div><input type="checkbox" id="intergenerational" name="intergenerational">
+      <label for="intergenerational">Intergenerationel</label></div>
+    <div><input type="checkbox" id="mobileHome" name="mobileHome">
+      <label for="mobileHome">Maison mobile</label></div>
+    <div><input type="checkbox" id="hobbyFarm" name="hobbyFarm">
+      <label for="hobbyFarm">Fermette</label></div>
+    <div><input type="checkbox" id="cottage" name="cottage">
+      <label for="cottage">Chalet</label></div>
+    <div><input type="checkbox" id="lot" name="lot">
+      <label for="lot">Terrain</label></div>
+      <p>Caractéristiques</p>
+
+    <div></div><label for="bedroomNumber">Nombre de chambres:</label>
+    <select name="bedroomNumber" id="bedroomNumber" form="filter">
+      <option value="1">1</option>
+      <option value="1+">1 ou +</option>
+      <option value="2">2</option>
+      <option value="2+">2 ou +</option>
+      <option value="3">3</option>
+      <option value="3+">3 ou +</option>
+      <option value="4">4</option>
+      <option value="4+">4 ou +</option>
+      <option value="5">5</option>
+      <option value="5+">5 ou +</option>
+    </select></div>
+    <div>
+      <label for="bathroomNumber">Nombre de chambres de bain:</label>
+      <select name="bathroomNumber" id="bathroomNumber" form="filter">
+        <option value="1+">1 ou +</option>
+        <option value="2+">2 ou +</option>
+        <option value="3+">3 ou +</option>
+        <option value="4+">4 ou +</option>
+        <option value="5+">5 ou +</option>
+      </select></div>
+    <div><label for="parkingNumber">Nombre de parkings</label>
+      <select name="parkingNumber" id="parkingNumber" form="filter">
+        <option value="1+">1 ou +</option>
+        <option value="2+">2 ou +</option>
+        <option value="3+">3 ou +</option>
+        <option value="4+">4 ou +</option>
+        <option value="5+">5 ou +</option>
+      </select></div>
+    <div><label for="garageNumber">Nombre de garages;</label>
+      <select name="garageNumber" id="garageNumber" form="filter">
+        <option value="1+">1 ou +</option>
+        <option value="2+">2 ou +</option>
+        <option value="3+">3 ou +</option>
+        <option value="4+">4 ou +</option>
+        <option value="5+">5 ou +</option>
+      </select></div>
+      <div><input type="checkbox" id="pool" name="pool">
+        <label for="pool">Piscine</label></div>
+      <div><input type="checkbox" id="elevator" name="elevator">
+        <label for="elevator">Ascenseur</label></div>
+      <div><input type="checkbox" id="adaptedMobility" name="adaptedMobility">
+        <label for="adaptedMobility">Adapté pour mobilité réduite</label></div>
+      <div><input type="checkbox" id="waterfront" name="waterfront">
+        <label for="waterfront">bord de l'eau</label></div>
+      <div><input type="checkbox" id="waterfrontAccess" name="waterfrontAccess">
+        <label for="waterfrontAccess">accès à l'eau</label></div>
+      <div><input type="checkbox" id="navigable" name="navigable">
+        <label for="navigable">plan d'eau navigable</label></div>
+      <div><input type="checkbox" id="resort" name="resort">
+        <label for="resort">Villégiature</label></div>
+      <div><input type="checkbox" id="furnished" name="furnished">
+        <label for="furnished">Meublé</label></div>
+        <div><input type="checkbox" id="semiFurnished" name="semiFurnished">
+          <label for="semiFurnished">semi-Meublé</label></div>
+
+      <p>Bâtiments</p>
+      <div><input type="checkbox" id="bungalow" name="bungalow">
+        <label for="bungalow">Plein-pied</label></div>
+      <div><input type="checkbox" id="splitLevel" name="splitLevel">
+        <label for="splitLevel">Paliers multiples</label></div>
+      <div><input type="checkbox" id="semiDetached" name="semiDetached">
+        <label for="semiDetached">Jumelé</label></div>
+      <div><input type="checkbox" id="newConstruction" name="newConstruction">
+        <label for="newConstruction">Nouvelle construction</label></div>
+      <div><input type="checkbox" id="centuryHistoric" name="centuryHistoric">
+        <label for="centuryHistoric">Centenaire/Historique</label></div>
+      <div><input type="checkbox" id="moreThanOneStory" name="moreThanOneStory">
+        <label for="moreThanOneStory">À étages</label></div>
+      <div><input type="checkbox" id="detached" name="detached">
+        <label for="detached">Détaché</label></div>
+      <div><input type="checkbox" id="attached" name="attached">
+        <label for="attached">en rangée</label></div>
+        <div><input type="checkbox" id="tenYearsOrLess" name="tenYearsOrLess">
+          <label for="tenYearsOrLess">10 ans ou moins</label></div>
+
+      <p>Autres critères</p>
+      <label for="landMin">Grandeur du terrain:</label><br>
+      <input type="text" id="landMin" name="landMin" value="1"><br>
+      <label for="landMax"> à </label><br>
+      <input type="text" id="landMax" name="landMax" value="5000"><br><br>
+
+    <input type="submit" value="Filtrer">
+   
+
+  </form>
+</body>
+
+
+</html>
