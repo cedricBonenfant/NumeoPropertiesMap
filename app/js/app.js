@@ -572,6 +572,7 @@ function filterSemiFurnished(semiFurnished) {
 
 async function filterBuildingCharacteric(bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess){
     console.log('filterBuildingCharacteric start');
+    /*
     tempArray = [];
     buildingArrayFiltered.forEach(building => {
         if (bungalow == true) {
@@ -620,5 +621,6 @@ async function filterBuildingCharacteric(bungalow,splitLevel,semiDetached,newCon
         buildingArrayFiltered = tempArray;
     }
     console.log('filterBuildingCharacteric end');
+    */
 
 }
