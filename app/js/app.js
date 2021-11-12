@@ -70,16 +70,16 @@ function filterByPrice(priceMin,priceMax){
 }
 
 // point of entry of the filter
-async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess){
+async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax){
     console.log('filter');
     console.log(singleFamilyHome)
-    await asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess);
+    await asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax);
     console.log('filter Done');
     console.log(tempArray[1].Owner);
 }
 
 // asynchronus filter ; call each filter
-async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess){
+async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax){
     console.log('asyncfilter');
     buildingArrayFiltered = await filterOwnershipType(ownershipType);
     buildingArrayFiltered = await filterByPrice(priceMin,priceMax);
@@ -97,6 +97,7 @@ async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,cond
     await filterResort(resort);
     await filterFurnished(furnished);
     await filterSemiFurnished(semiFurnished)
+    await filterLand(landMin,landMax);
     console.log('asyncfilter Done');
 }
 //filter building by ownership type aka to buy or to rent
@@ -623,4 +624,30 @@ async function filterBuildingCharacteric(bungalow,splitLevel,semiDetached,newCon
     console.log('filterBuildingCharacteric end');
     */
 
+}
+
+async function filterLand(landMin,landMax){
+    console.log('filterLand start');
+    /*
+    tempArray = [];
+    buildingArrayFiltered.forEach(building => {
+        if (landMin != null && landMax == null) {
+            if (building.land >= landMin) {
+                tempArray.push(building);
+            }
+        }
+        else if (landMin == null && landMax != null) {
+            if (building.land <= landMax) {
+                tempArray.push(building);
+            }
+        }
+        else if (landMin != null && landMax != null) {
+            if (building.land <= landMax && building.land >= landMin) {
+                tempArray.push(building);
+            }
+        }
+        
+    });
+*/
+    console.log('filterLand end');
 }

@@ -22,7 +22,7 @@
   <form name="filter" action="/app/js/app.js"
     onsubmit="return filterBuilding(getPriceMin(),getPriceMax(),ownershipType.value,singleFamilyHome.checked,condoApartment.checked,loftStudio.checked,intergenerational.checked,mobileHome.checked,hobbyFarm.checked,cottage.checked,lot.checked,
     bedroomNumber.value,bathroomNumber.value,parkingNumber.value,garageNumber.valuem,piscine.checked,elevator.checked,adaptedMobility.checked,waterfront.checked,waterfrontAccess.checked,navigable.checked,resort.checked,furnished.checked,semiFurnished.checked,
-    bungalow.checked,splitLevel.checked,semiDetached.checked,newConstruction.checked,centuryHistoric.checked,moreThanOneStory.checked,detached.checked,tenYearsOrLess.checked)"
+    bungalow.checked,splitLevel.checked,semiDetached.checked,newConstruction.checked,centuryHistoric.checked,moreThanOneStory.checked,detached.checked,tenYearsOrLess.checked,landMin.value,landMax.value)"
     method="post">
     <label for="priceMin">Prix minimum:</label><br>
     <input type="text" id="priceMin" name="priceMin" value="1"><br>
@@ -97,17 +97,17 @@
       <div><input type="checkbox" id="adaptedMobility" name="adaptedMobility">
         <label for="adaptedMobility">Adapté pour mobilité réduite</label></div>
       <div><input type="checkbox" id="waterfront" name="waterfront">
-        <label for="waterfront">bord de l'eau</label></div>
+        <label for="waterfront">Bord de l'eau</label></div>
       <div><input type="checkbox" id="waterfrontAccess" name="waterfrontAccess">
-        <label for="waterfrontAccess">accès à l'eau</label></div>
+        <label for="waterfrontAccess">Accès à l'eau</label></div>
       <div><input type="checkbox" id="navigable" name="navigable">
-        <label for="navigable">plan d'eau navigable</label></div>
+        <label for="navigable">Plan d'eau navigable</label></div>
       <div><input type="checkbox" id="resort" name="resort">
         <label for="resort">Villégiature</label></div>
       <div><input type="checkbox" id="furnished" name="furnished">
         <label for="furnished">Meublé</label></div>
         <div><input type="checkbox" id="semiFurnished" name="semiFurnished">
-          <label for="semiFurnished">semi-Meublé</label></div>
+          <label for="semiFurnished">Semi-Meublé</label></div>
 
       <p>Bâtiments</p>
       <div><input type="checkbox" id="bungalow" name="bungalow">
@@ -125,7 +125,7 @@
       <div><input type="checkbox" id="detached" name="detached">
         <label for="detached">Détaché</label></div>
       <div><input type="checkbox" id="attached" name="attached">
-        <label for="attached">en rangée</label></div>
+        <label for="attached">En rangée</label></div>
         <div><input type="checkbox" id="tenYearsOrLess" name="tenYearsOrLess">
           <label for="tenYearsOrLess">10 ans ou moins</label></div>
 
@@ -134,9 +134,15 @@
       <input type="text" id="landMin" name="landMin" value="1"><br>
       <label for="landMax"> à </label><br>
       <input type="text" id="landMax" name="landMax" value="5000"><br><br>
+      <label for="newSince"> Nouveau depuis </label><br>
+      <input type="date" id="newSince" name="newSince">
+      <div><input type="checkbox" id="openHouse" name="openHouse">
+        <label for="openHouse">Visite libres</label></div>
+      <div><input type="checkbox" id="openHouseVirtual" name="openHouseVirtual">
+        <label for="openHouseVirtual">Visite libres virtuelles</label></div>
 
     <input type="submit" value="Filtrer">
-   
+    
 
   </form>
 </body>
