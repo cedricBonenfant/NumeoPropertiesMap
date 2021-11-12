@@ -70,16 +70,16 @@ function filterByPrice(priceMin,priceMax){
 }
 
 // point of entry of the filter
-async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax){
+async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual){
     console.log('filter');
     console.log(singleFamilyHome)
-    await asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax);
+    await asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual);
     console.log('filter Done');
     console.log(tempArray[1].Owner);
 }
 
 // asynchronus filter ; call each filter
-async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax){
+async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual){
     console.log('asyncfilter');
     buildingArrayFiltered = await filterOwnershipType(ownershipType);
     buildingArrayFiltered = await filterByPrice(priceMin,priceMax);
@@ -98,6 +98,8 @@ async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,cond
     await filterFurnished(furnished);
     await filterSemiFurnished(semiFurnished)
     await filterLand(landMin,landMax);
+    await filterOpenHouse(openHouse);
+    await filterOpenHouseVirtual(openHouseVirtual);
     console.log('asyncfilter Done');
 }
 //filter building by ownership type aka to buy or to rent
@@ -648,6 +650,41 @@ async function filterLand(landMin,landMax){
         }
         
     });
+    if(landMin != null || landMax != null){
+        buildingArrayFiltered = tempArray;
+    }
 */
     console.log('filterLand end');
+}
+
+async function filterOpenHouse(openHouse){
+    console.log('filterOpenHouse start');
+    /*
+    tempArray=[];
+    if (openHouse == true) {
+        array.forEach(building => {
+            if (building.openHouse == true) {
+                tempArray.push(building);
+            }
+        });
+        buildingArrayFiltered = tempArray;
+    }
+    */
+    console.log('filterOpenHouse end');
+}
+
+async function filterOpenHouseVirtual(openHouseVirtual){
+    console.log('filterOpenHouseVirtual start');
+    /*
+    tempArray=[];
+    if (openHouseVirtual == true) {
+        array.forEach(building => {
+            if (building.openHouseVirtual == true) {
+                tempArray.push(building);
+            }
+        });
+        buildingArrayFiltered = tempArray;
+    }
+    */
+    console.log('filterOpenHouseVirtual end');
 }
