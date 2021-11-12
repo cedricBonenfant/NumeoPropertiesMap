@@ -5,13 +5,13 @@ var buildingArrayFiltered = [];
 
 ZOHO.embeddedApp.on("PageLoad",entity => {        // This is the information about the current record, if applicable.
             console.log(entity); 
-            ZOHO.CRM.API.getAllRecords({Entity:"Immeubles"})
+            ZOHO.CRM.API.getAllRecords({Entity:"Propri_t_s"})
             .then(function(data){
             console.log(data);
             console.log(data.info.more_records);
             var resultBuilding = [];
             var resultLoan = [];
-            Promise.resolve(resultBuilding = loadAllRecords("Immeubles")).then(setBuildingArray);
+            Promise.resolve(resultBuilding = loadAllRecords("Propri_t_s")).then(setBuildingArray);
 
 
         }) });      
@@ -59,13 +59,13 @@ function filterByPrice(priceMin,priceMax){
 
     tempArray = [];
     buildingArrayFiltered.forEach(building => {
-        if (building.Prix_d_achat >= priceMin && building.Prix_d_achat <= priceMax) {
+        if (building.Prix >= priceMin && building.Prix <= priceMax) {
             tempArray.push(building);
         }
     });
     
     console.log('filterPrice End');
-    return 
+    return tempArray
     
 }
 
@@ -75,7 +75,7 @@ async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,c
     console.log(singleFamilyHome)
     await asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual);
     console.log('filter Done');
-    console.log(tempArray[1].Owner);
+    console.log(buildingArrayFiltered.length);
 }
 
 // asynchronus filter ; call each filter
@@ -83,7 +83,8 @@ async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,cond
     console.log('asyncfilter');
     buildingArrayFiltered = await filterOwnershipType(ownershipType);
     buildingArrayFiltered = await filterByPrice(priceMin,priceMax);
-    await filterPropertyType(singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot);
+    buildingArrayFiltered = await filterPropertyType(singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot);
+    console.log(buildingArrayFiltered);
     await filterBedrooms(bedroomNumber);
     await filterBathrooms(bathroomNumber);
     await filterParkings(parkingNumber);
@@ -107,13 +108,15 @@ async function filterOwnershipType(ownershipType){
     console.log('filterOwnershipType start');
     tempArray = [];
     buildingArrayFiltered.forEach(building => {
-        if (ownershipType == 'sell') {
-            //if building ownershipType == sell add to temp array
-        }
-        if (ownershipType == 'buy') {
-            //if building ownershipType == buy add to temp array
-        }
+            if (building.vente_location == 'Location' && ownershipType == 'rent') {
+                tempArray.push(building);
+            }
+            if (building.vente_location == 'Vente' && ownershipType == 'sell') {
+                tempArray.push(building);
+            }
+
     });
+    buildingArrayFiltered = tempArray;
     console.log('filterOwnershipType Done');
 
     //return tempArray
@@ -121,63 +124,71 @@ async function filterOwnershipType(ownershipType){
 }
 
 async function filterPropertyType(singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot){
-    /*
+    
     console.log('filterPropertyType start');
     tempArray = [];
+    
     buildingArrayFiltered.forEach(building => {
-       switch (building.type) {
+    console.log(building.Type_de_propi_t);
+    if (building.Type_de_propi_t != null) {
+        switch (building.Type_de_propi_t) {
            case 'singleFamilyHome':
                if (singleFamilyHome == true) {
-                   tempArray.push[building]
+                   tempArray.push(building)
                }
                break;
             case 'condoApartment':
                 if (condoApartment == true) {
-                    tempArray.push[building]
+                    tempArray.push(building)
                 }
                 break;
             case 'loftStudio':
                if (loftStudio == true) {
-                   tempArray.push[building]
+                tempArray.push(building)
                }
                break;
             case 'intergenerational':
                 if (intergenerational == true) {
-                    tempArray.push[building]
+                    tempArray.push(building)
                 }
                 break;
             case 'mobileHome':
                if (mobileHome == true) {
-                   tempArray.push[building]
+                    tempArray.push(building)
                }
                break;
             case 'hobbyFarm':
                 if (hobbyFarm == true) {
-                    tempArray.push[building]
+                    tempArray.push(building)
                 }
                 break;
-            case 'cottage':
+            case 'Chalet':
                if (cottage == true) {
-                   tempArray.push[building]
-               }
+                    tempArray.push(building)
+                    console.log(building);
+                }
                break;
             case 'lot':
                 if (lot == true) {
-                    tempArray.push[building]
+                    tempArray.push(building)
                 }
                 break;
 
        } 
+    }
+       
     });
     if (singleFamilyHome == true || condoApartment == true || loftStudio == true ||
          intergenerational == true || mobileHome == true || hobbyFarm == true || cottage == true || lot == true) 
     {
-        buildingArrayFiltered = tempArray;
+        console.log(tempArray);
+        console.log('filterPropertyType end');
+        return tempArray;
     }
     console.log('filterPropertyType end');
+    return buildingArrayFiltered;
 
-
-    */
+    
     
 }
 

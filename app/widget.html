@@ -21,7 +21,7 @@
 <body>
   <form name="filter" action="/app/js/app.js"
     onsubmit="return filterBuilding(getPriceMin(),getPriceMax(),ownershipType.value,singleFamilyHome.checked,condoApartment.checked,loftStudio.checked,intergenerational.checked,mobileHome.checked,hobbyFarm.checked,cottage.checked,lot.checked,
-    bedroomNumber.value,bathroomNumber.value,parkingNumber.value,garageNumber.valuem,piscine.checked,elevator.checked,adaptedMobility.checked,waterfront.checked,waterfrontAccess.checked,navigable.checked,resort.checked,furnished.checked,semiFurnished.checked,
+    bedroomNumber.value,bathroomNumber.value,parkingNumber.value,garageNumber.valuem,pool.checked,elevator.checked,adaptedMobility.checked,waterfront.checked,waterfrontAccess.checked,navigable.checked,resort.checked,furnished.checked,semiFurnished.checked,
     bungalow.checked,splitLevel.checked,semiDetached.checked,newConstruction.checked,centuryHistoric.checked,moreThanOneStory.checked,detached.checked,tenYearsOrLess.checked,landMin.value,landMax.value,openHouse.checked,openHouseVirtual.checked)"
     method="post">
     <label for="priceMin">Prix minimum:</label><br>
@@ -31,7 +31,7 @@
     <label for="ownershipType">vendre/louer:</label>
     <select name="ownershipType" id="ownershipType" form="filter">
       <option value="sell">à vendre</option>
-      <option value="buy">à louer</option>
+      <option value="rent">à louer</option>
     </select>
     <p>type de propriété</p>
     <div><input type="checkbox" id="singleFamilyHome" name="singleFamilyHome">
@@ -145,6 +145,8 @@
     
 
   </form>
+  
+
 </body>
 
 
