@@ -451,145 +451,127 @@ function filterGarages(garageNumber){
 
 function filterPiscine(piscine) {
     console.log('filterPiscine start');
-    /*
     tempArray = [];
     if (piscine == true) {
         buildingArrayFiltered.forEach(building => {
-            if (building.piscine == true) {
+            if (building.Piscine == true) {
                 tempArray.push(building);
             }
         });
     buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterPiscine end');
 }
 
 function filterElevator(elevator) {
     console.log('filterElevator start');
-    /*
     tempArray = [];
     if (elevator == true) {
         buildingArrayFiltered.forEach(building => {
-            if (building.elevator == true) {
+            if (building.Ascenseur == true) {
                 tempArray.push(building);
             }
         });
     buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterElevator end');
 }
 
 function filterAdaptedMobility(AdaptedMobility) {
     console.log('filterAdaptedMobility start');
-    /*
     tempArray = [];
     if (AdaptedMobility == true) {
         buildingArrayFiltered.forEach(building => {
-            if (building.AdaptedMobility == true) {
+            if (building.Adapt_e_pour_mobilit_r_duite == true) {
                 tempArray.push(building);
             }
         });
     buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterAdaptedMobility end');
 }
 
 function filterWaterfront(waterfront) {
-    console.log('filterWaterfront start');
-    /*
+    console.log('filterWaterfront start'); 
     tempArray = [];
     if (waterfront == true) {
         buildingArrayFiltered.forEach(building => {
-            if (building.waterfront == true) {
+            if (building.Bord_de_l_eau == true) {
                 tempArray.push(building);
             }
         });
     buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterWaterfront end');
 }
 
 function filterWaterfrontAccess(waterfrontAccess) {
     console.log('filterWaterfrontAccess start');
-    /*
     tempArray = [];
     if (waterfrontAccess == true) {
         buildingArrayFiltered.forEach(building => {
-            if (building.waterfrontAccess == true) {
+            if (building.Acc_s_l_eau == true) {
                 tempArray.push(building);
             }
         });
     buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterWaterfrontAccess end');
 }
 
 function filterNavigable(navigable) {
     console.log('filterNavigable start');
-    /*
     tempArray = [];
     if (navigable == true) {
         buildingArrayFiltered.forEach(building => {
-            if (building.navigable == true) {
+            if (building.Plan_d_eau_navigable == true) {
                 tempArray.push(building);
             }
         });
     buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterNavigable end');
 }
 
 function filterResort(resort) {
     console.log('filterResort start');
-    /*
     tempArray = [];
     if (resort == true) {
         buildingArrayFiltered.forEach(building => {
-            if (building.resort == true) {
+            if (building.Vill_giature == true) {
                 tempArray.push(building);
             }
         });
     buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterResort end');
 }
 
 function filterFurnished(furnished) {
     console.log('filterFurnished start');
-    /*
     tempArray = [];
     if (furnished == true) {
         buildingArrayFiltered.forEach(building => {
-            if (building.furnished == true) {
+            if (building.Meubl == true) {
                 tempArray.push(building);
             }
         });
     buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterFurnished end');
 }
 
 function filterSemiFurnished(semiFurnished) {
     console.log('filterSemiFurnished start');
-    /*
     tempArray = [];
     if (semiFurnished == true) {
         buildingArrayFiltered.forEach(building => {
-            if (building.semiFurnished == true) {
+            if (building.Semi_meubl == true) {
                 tempArray.push(building);
             }
         });
     buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterSemiFurnished end');
 }
 
