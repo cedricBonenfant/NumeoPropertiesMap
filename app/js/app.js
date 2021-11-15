@@ -84,7 +84,6 @@ async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,cond
     buildingArrayFiltered = await filterOwnershipType(ownershipType);
     buildingArrayFiltered = await filterByPrice(priceMin,priceMax);
     buildingArrayFiltered = await filterPropertyType(singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot);
-    console.log(buildingArrayFiltered);
     await filterBedrooms(bedroomNumber);
     await filterBathrooms(bathroomNumber);
     await filterParkings(parkingNumber);
@@ -194,249 +193,254 @@ async function filterPropertyType(singleFamilyHome,condoApartment,loftStudio,int
 
 function filterBedrooms(bedroomNumber){
     console.log('filterBedrooms start');
-    /*
     tempArray = [];
-    buildingArrayFiltered.forEach(building => {
+    console.log(buildingArrayFiltered);
+    if (bedroomNumber != '-') {
+        buildingArrayFiltered.forEach(building => {
         if (bedroomNumber == '1') {
-            if (building.bedroomNumber == 1) {
+            if (building.Nombres_de_chambre == 1) {
                 tempArray.push(building);
             }
         }
         if (bedroomNumber == '2') {
-            if (building.bedroomNumber == 2) {
+            if (building.Nombres_de_chambre == 2) {
                 tempArray.push(building);
             }
         }
         if (bedroomNumber == '3') {
-            if (building.bedroomNumber == 3) {
+            if (building.Nombres_de_chambre == 3) {
                 tempArray.push(building);
             }
         }
         if (bedroomNumber == '4') {
-            if (building.bedroomNumber == 4) {
+            if (building.Nombres_de_chambre == 4) {
                 tempArray.push(building);
             }
         }
         if (bedroomNumber == '5') {
-            if (building.bedroomNumber == 5) {
+            if (building.Nombres_de_chambre == 5) {
                 tempArray.push(building);
             }
         }
-
         if (bedroomNumber == '1+') {
-            if (building.bedroomNumber >= 1) {
+            if (building.Nombres_de_chambre >= 1) {
                 tempArray.push(building);
             }
         }
         if (bedroomNumber == '2+') {
-            if (building.bedroomNumber >= 2) {
+            if (building.Nombres_de_chambre >= 2) {
                 tempArray.push(building);
             }
         }
         if (bedroomNumber == '3+') {
-            if (building.bedroomNumber >= 3) {
+            if (building.Nombres_de_chambre >= 3) {
                 tempArray.push(building);
             }
         }
         if (bedroomNumber == '4+') {
-            if (building.bedroomNumber >= 4) {
+            if (building.Nombres_de_chambre >= 4) {
                 tempArray.push(building);
             }
         }
         if (bedroomNumber == '5+') {
-            if (building.bedroomNumber >= 5) {
+            if (building.Nombres_de_chambre >= 5) {
                 tempArray.push(building);
             }
         }
     });
     buildingArrayFiltered = tempArray;
-    */
+    }
+    
+    
     console.log('filterBedrooms end');
 }
 
 function filterBathrooms(bathroomNumber){
     console.log('filterBathrooms start');
-    /*
-    tempArray = [];
+    if (bathroomNumber != '-') {
+        tempArray = [];
     buildingArrayFiltered.forEach(building => {
         if (bathroomNumber == '1') {
-            if (building.bathroomNumber == 1) {
+            if (building.Nombre_de_chambre_de_bain == 1) {
                 tempArray.push(building);
             }
         }
         if (bathroomNumber == '2') {
-            if (building.bathroomNumber == 2) {
+            if (building.Nombre_de_chambre_de_bain == 2) {
                 tempArray.push(building);
             }
         }
         if (bathroomNumber == '3') {
-            if (building.bathroomNumber == 3) {
+            if (building.Nombre_de_chambre_de_bain == 3) {
                 tempArray.push(building);
             }
         }
         if (bathroomNumber == '4') {
-            if (building.bathroomNumber == 4) {
+            if (building.Nombre_de_chambre_de_bain == 4) {
                 tempArray.push(building);
             }
         }
         if (bathroomNumber == '5') {
-            if (building.bathroomNumber == 5) {
+            if (building.Nombre_de_chambre_de_bain == 5) {
                 tempArray.push(building);
             }
         }
-
         if (bathroomNumber == '1+') {
-            if (building.bathroomNumber >= 1) {
+            if (building.Nombre_de_chambre_de_bain >= 1) {
                 tempArray.push(building);
             }
         }
         if (bathroomNumber == '2+') {
-            if (building.bathroomNumber >= 2) {
+            if (building.Nombre_de_chambre_de_bain >= 2) {
                 tempArray.push(building);
             }
         }
         if (bathroomNumber == '3+') {
-            if (building.bathroomNumber >= 3) {
+            if (building.Nombre_de_chambre_de_bain >= 3) {
                 tempArray.push(building);
             }
         }
         if (bathroomNumber == '4+') {
-            if (building.bathroomNumber >= 4) {
+            if (building.Nombre_de_chambre_de_bain >= 4) {
                 tempArray.push(building);
             }
         }
         if (bathroomNumber == '5+') {
-            if (building.bathroomNumber >= 5) {
+            if (building.Nombre_de_chambre_de_bain >= 5) {
                 tempArray.push(building);
             }
         }
     });
     buildingArrayFiltered = tempArray;
-    */
+    }
+    
+    
     console.log('filterBathrooms end');
 }
 
 function filterParkings(parkingNumber){
     console.log('filterParkings start');
-    /*
-    tempArray = [];
+    if (parkingNumber != '-') {
+        tempArray = [];
     buildingArrayFiltered.forEach(building => {
         if (parkingNumber == '1') {
-            if (building.parkingNumber == 1) {
+            if (building.Nombre_de_stationnements == 1) {
                 tempArray.push(building);
             }
         }
         if (parkingNumber == '2') {
-            if (building.parkingNumber == 2) {
+            if (building.Nombre_de_stationnements == 2) {
                 tempArray.push(building);
             }
         }
         if (parkingNumber == '3') {
-            if (building.parkingNumber == 3) {
+            if (building.Nombre_de_stationnements == 3) {
                 tempArray.push(building);
             }
         }
         if (parkingNumber == '4') {
-            if (building.parkingNumber == 4) {
+            if (building.Nombre_de_stationnements == 4) {
                 tempArray.push(building);
             }
         }
         if (parkingNumber == '5') {
-            if (building.parkingNumber == 5) {
+            if (building.Nombre_de_stationnements == 5) {
                 tempArray.push(building);
             }
         }
-
         if (parkingNumber == '1+') {
-            if (building.parkingNumber >= 1) {
+            if (building.Nombre_de_stationnements >= 1) {
                 tempArray.push(building);
             }
         }
         if (parkingNumber == '2+') {
-            if (building.parkingNumber >= 2) {
+            if (building.Nombre_de_stationnements >= 2) {
                 tempArray.push(building);
             }
         }
         if (parkingNumber == '3+') {
-            if (building.parkingNumber >= 3) {
+            if (building.Nombre_de_stationnements >= 3) {
                 tempArray.push(building);
             }
         }
         if (parkingNumber == '4+') {
-            if (building.parkingNumber >= 4) {
+            if (building.Nombre_de_stationnements >= 4) {
                 tempArray.push(building);
             }
         }
         if (parkingNumber == '5+') {
-            if (building.parkingNumber >= 5) {
+            if (building.Nombre_de_stationnements >= 5) {
                 tempArray.push(building);
             }
         }
     });
     buildingArrayFiltered = tempArray;
-    */
+    }
+    
+    
     console.log('filterParkings end');
 }
 
 function filterGarages(garageNumber){
     console.log('filterGarages start');
-    /*
-    tempArray = [];
+    if (garageNumber != '-') {
+        tempArray = [];
     buildingArrayFiltered.forEach(building => {
         if (garageNumber == '1') {
-            if (building.garageNumber == 1) {
+            if (building.Nombre_de_garages == 1) {
                 tempArray.push(building);
             }
         }
         if (garageNumber == '2') {
-            if (building.garageNumber == 2) {
+            if (building.Nombre_de_garages == 2) {
                 tempArray.push(building);
             }
         }
         if (garageNumber == '3') {
-            if (building.garageNumber == 3) {
+            if (building.Nombre_de_garages == 3) {
                 tempArray.push(building);
             }
         }
         if (garageNumber == '4') {
-            if (building.garageNumber == 4) {
+            if (building.Nombre_de_garages == 4) {
                 tempArray.push(building);
             }
         }
         if (garageNumber == '5') {
-            if (building.garageNumber == 5) {
+            if (building.Nombre_de_garages == 5) {
                 tempArray.push(building);
             }
         }
-
         if (garageNumber == '1+') {
-            if (building.garageNumber >= 1) {
+            if (building.Nombre_de_garages >= 1) {
                 tempArray.push(building);
             }
         }
         if (garageNumber == '2+') {
-            if (building.garageNumber >= 2) {
+            if (building.Nombre_de_garages >= 2) {
                 tempArray.push(building);
             }
         }
         if (garageNumber == '3+') {
-            if (building.garageNumber >= 3) {
+            if (building.Nombre_de_garages >= 3) {
                 tempArray.push(building);
             }
         }
         if (garageNumber == '4+') {
-            if (building.garageNumber >= 4) {
+            if (building.Nombre_de_garages >= 4) {
                 tempArray.push(building);
             }
         }
         if (garageNumber == '5+') {
-            if (building.garageNumber >= 5) {
+            if (building.Nombre_de_garages >= 5) {
                 tempArray.push(building);
             }
         }
     });
     buildingArrayFiltered = tempArray;
-    */
+    }
+    
+
     console.log('filterGarages end');
 }
 
