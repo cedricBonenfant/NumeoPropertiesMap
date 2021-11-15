@@ -70,16 +70,16 @@ function filterByPrice(priceMin,priceMax){
 }
 
 // point of entry of the filter
-async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual){
+async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual){
     console.log('filter');
     console.log(singleFamilyHome)
-    await asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual);
+    await asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual);
     console.log('filter Done');
     console.log(buildingArrayFiltered.length);
 }
 
 // asynchronus filter ; call each filter
-async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual){
+async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual){
     console.log('asyncfilter');
     buildingArrayFiltered = await filterOwnershipType(ownershipType);
     buildingArrayFiltered = await filterByPrice(priceMin,priceMax);
@@ -97,6 +97,7 @@ async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,cond
     await filterResort(resort);
     await filterFurnished(furnished);
     await filterSemiFurnished(semiFurnished)
+    await filterBuildingCharacteristic(bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess);
     await filterLand(landMin,landMax);
     await filterOpenHouse(openHouse);
     await filterOpenHouseVirtual(openHouseVirtual);
@@ -575,48 +576,54 @@ function filterSemiFurnished(semiFurnished) {
     console.log('filterSemiFurnished end');
 }
 
-async function filterBuildingCharacteric(bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,tenYearsOrLess){
-    console.log('filterBuildingCharacteric start');
-    /*
+async function filterBuildingCharacteristic(bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess){
+    console.log('filterBuildingCharacteristic start');
+    console.log(attached);
     tempArray = [];
     buildingArrayFiltered.forEach(building => {
+        console.log(building.b_timents);
         if (bungalow == true) {
-            if (building.bungalow == true) {
+            if (building.b_timents == 'Plein-pied') {
                 tempArray.push(building);
             }
         }
         if (splitLevel == true) {
-            if (building.splitLevel == true) {
+            if (building.b_timents == 'Paliers multiples') {
                 tempArray.push(building);
             }
         }
         if (semiDetached == true) {
-            if (building.semiDetached == true) {
+            if (building.b_timents == 'Jumelé') {
                 tempArray.push(building);
             }
         }
         if (newConstruction == true) {
-            if (building.newConstruction == true) {
+            if (building.b_timents == 'Nouvelle construction') {
                 tempArray.push(building);
             }
         }
         if (centuryHistoric == true) {
-            if (building.centuryHistoric == true) {
+            if (building.b_timents == 'Centenaire/Historique') {
                 tempArray.push(building);
             }
         }
         if (moreThanOneStory == true) {
-            if (building.moreThanOneStory == true) {
+            if (building.b_timents == 'À étages') {
                 tempArray.push(building);
             }
         }
         if (detached == true) {
-            if (building.detached == true) {
+            if (building.b_timents == 'Détaché') {
+                tempArray.push(building);
+            }
+        }
+        if (attached == true) {
+            if (building.b_timents == 'En rangée') {
                 tempArray.push(building);
             }
         }
         if (tenYearsOrLess == true) {
-            if (building.tenYearsOrLess == true) {
+            if (building.b_timents == '10 ans ou moins') {
                 tempArray.push(building);
             }
         }
@@ -625,8 +632,8 @@ async function filterBuildingCharacteric(bungalow,splitLevel,semiDetached,newCon
     {
         buildingArrayFiltered = tempArray;
     }
-    console.log('filterBuildingCharacteric end');
-    */
+    console.log('filterBuildingCharacteristic end');
+    
 
 }
 
