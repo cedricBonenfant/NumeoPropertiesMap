@@ -131,32 +131,32 @@ async function filterPropertyType(singleFamilyHome,condoApartment,loftStudio,int
     console.log(building.Type_de_propi_t);
     if (building.Type_de_propi_t != null) {
         switch (building.Type_de_propi_t) {
-           case 'singleFamilyHome':
+           case 'Maison unifamiliale':
                if (singleFamilyHome == true) {
                    tempArray.push(building)
                }
                break;
-            case 'condoApartment':
+            case 'Condo / Appartement':
                 if (condoApartment == true) {
                     tempArray.push(building)
                 }
                 break;
-            case 'loftStudio':
+            case 'Loft / Studio':
                if (loftStudio == true) {
                 tempArray.push(building)
                }
                break;
-            case 'intergenerational':
+            case 'intergénération':
                 if (intergenerational == true) {
                     tempArray.push(building)
                 }
                 break;
-            case 'mobileHome':
+            case 'Maison mobile':
                if (mobileHome == true) {
                     tempArray.push(building)
                }
                break;
-            case 'hobbyFarm':
+            case 'Fermette':
                 if (hobbyFarm == true) {
                     tempArray.push(building)
                 }
@@ -164,10 +164,9 @@ async function filterPropertyType(singleFamilyHome,condoApartment,loftStudio,int
             case 'Chalet':
                if (cottage == true) {
                     tempArray.push(building)
-                    console.log(building);
                 }
                break;
-            case 'lot':
+            case 'Terrain':
                 if (lot == true) {
                     tempArray.push(building)
                 }
@@ -180,7 +179,6 @@ async function filterPropertyType(singleFamilyHome,condoApartment,loftStudio,int
     if (singleFamilyHome == true || condoApartment == true || loftStudio == true ||
          intergenerational == true || mobileHome == true || hobbyFarm == true || cottage == true || lot == true) 
     {
-        console.log(tempArray);
         console.log('filterPropertyType end');
         return tempArray;
     }
@@ -194,7 +192,7 @@ async function filterPropertyType(singleFamilyHome,condoApartment,loftStudio,int
 function filterBedrooms(bedroomNumber){
     console.log('filterBedrooms start');
     tempArray = [];
-    console.log(buildingArrayFiltered);
+    
     if (bedroomNumber != '-') {
         buildingArrayFiltered.forEach(building => {
         if (bedroomNumber == '1') {
@@ -249,6 +247,7 @@ function filterBedrooms(bedroomNumber){
         }
     });
     buildingArrayFiltered = tempArray;
+    console.log(buildingArrayFiltered.length);
     }
     
     
@@ -312,6 +311,7 @@ function filterBathrooms(bathroomNumber){
         }
     });
     buildingArrayFiltered = tempArray;
+    console.log(buildingArrayFiltered.length);
     }
     
     
@@ -375,6 +375,7 @@ function filterParkings(parkingNumber){
         }
     });
     buildingArrayFiltered = tempArray;
+    console.log(buildingArrayFiltered.length);
     }
     
     
@@ -384,6 +385,7 @@ function filterParkings(parkingNumber){
 function filterGarages(garageNumber){
     console.log('filterGarages start');
     if (garageNumber != '-') {
+        console.log(garageNumber);
         tempArray = [];
     buildingArrayFiltered.forEach(building => {
         if (garageNumber == '1') {
@@ -394,6 +396,7 @@ function filterGarages(garageNumber){
         if (garageNumber == '2') {
             if (building.Nombre_de_garages == 2) {
                 tempArray.push(building);
+                
             }
         }
         if (garageNumber == '3') {
@@ -417,6 +420,7 @@ function filterGarages(garageNumber){
             }
         }
         if (garageNumber == '2+') {
+            console.log('were here');
             if (building.Nombre_de_garages >= 2) {
                 tempArray.push(building);
             }
@@ -438,6 +442,7 @@ function filterGarages(garageNumber){
         }
     });
     buildingArrayFiltered = tempArray;
+    console.log(buildingArrayFiltered.length);
     }
     
 
