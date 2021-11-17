@@ -1,7 +1,14 @@
-// Get Entity Data from CRM (Note: this only works within Zoho CRM)    
+ 
 var buildingArray = [];
 var buildingArrayFiltered = [];
 
+let map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 8,
+  });
+}
 
 ZOHO.embeddedApp.on("PageLoad",entity => {        // This is the information about the current record, if applicable.
             console.log(entity); 
@@ -578,10 +585,8 @@ function filterSemiFurnished(semiFurnished) {
 
 async function filterBuildingCharacteristic(bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess){
     console.log('filterBuildingCharacteristic start');
-    console.log(attached);
     tempArray = [];
     buildingArrayFiltered.forEach(building => {
-        console.log(building.b_timents);
         if (bungalow == true) {
             if (building.b_timents == 'Plein-pied') {
                 tempArray.push(building);
@@ -633,67 +638,60 @@ async function filterBuildingCharacteristic(bungalow,splitLevel,semiDetached,new
         buildingArrayFiltered = tempArray;
     }
     console.log('filterBuildingCharacteristic end');
-    
-
 }
 
 async function filterLand(landMin,landMax){
     console.log('filterLand start');
-    /*
     tempArray = [];
     buildingArrayFiltered.forEach(building => {
-        if (landMin != null && landMax == null) {
-            if (building.land >= landMin) {
-                tempArray.push(building);
+        if (building.taille_du_terrain_pied_carr != null) {
+            if (landMin != null && landMax == 0) {
+                if (building.taille_du_terrain_pied_carr >= landMin) {
+                    tempArray.push(building);
+                }
             }
-        }
-        else if (landMin == null && landMax != null) {
-            if (building.land <= landMax) {
-                tempArray.push(building);
+            else if (landMin == 0 && landMax != null) {
+                if (building.taille_du_terrain_pied_carr <= landMax) {
+                    tempArray.push(building);
+                }
             }
-        }
-        else if (landMin != null && landMax != null) {
-            if (building.land <= landMax && building.land >= landMin) {
-                tempArray.push(building);
-            }
-        }
-        
+            else if (landMin != null && landMax != null) {
+                if (building.taille_du_terrain_pied_carr <= landMax && building.taille_du_terrain_pied_carr >= landMin) {
+                    tempArray.push(building);
+                }
+            } 
+        } 
     });
     if(landMin != null || landMax != null){
         buildingArrayFiltered = tempArray;
     }
-*/
     console.log('filterLand end');
 }
 
 async function filterOpenHouse(openHouse){
     console.log('filterOpenHouse start');
-    /*
     tempArray=[];
-    if (openHouse == true) {
-        array.forEach(building => {
-            if (building.openHouse == true) {
+    if (openHouse === true) {
+        buildingArrayFiltered.forEach(building => {
+            if (building.Visite_libre == true) {
                 tempArray.push(building);
             }
         });
         buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterOpenHouse end');
 }
 
 async function filterOpenHouseVirtual(openHouseVirtual){
     console.log('filterOpenHouseVirtual start');
-    /*
     tempArray=[];
     if (openHouseVirtual == true) {
-        array.forEach(building => {
-            if (building.openHouseVirtual == true) {
+        buildingArrayFiltered.forEach(building => {
+            if (building.Visite_virtuel_libre	 == true) {
                 tempArray.push(building);
             }
         });
         buildingArrayFiltered = tempArray;
     }
-    */
     console.log('filterOpenHouseVirtual end');
 }

@@ -15,6 +15,13 @@
       let priceMin = document.forms["filter"]["priceMin"].value;
       return priceMin
     }
+    function getLandMax(){
+      let max = document.forms["filter"]["landMax"].value;
+      if (max == '') {
+        max = 0;
+      }
+      return max
+    }
   </script>
 </head>
 
@@ -22,7 +29,7 @@
   <form name="filter" action="/app/js/app.js"
     onsubmit="return filterBuilding(getPriceMin(),getPriceMax(),ownershipType.value,singleFamilyHome.checked,condoApartment.checked,loftStudio.checked,intergenerational.checked,mobileHome.checked,hobbyFarm.checked,cottage.checked,lot.checked,
     bedroomNumber.value,bathroomNumber.value,parkingNumber.value,garageNumber.value,pool.checked,elevator.checked,adaptedMobility.checked,waterfront.checked,waterfrontAccess.checked,navigable.checked,resort.checked,furnished.checked,semiFurnished.checked,
-    bungalow.checked,splitLevel.checked,semiDetached.checked,newConstruction.checked,centuryHistoric.checked,moreThanOneStory.checked,detached.checked,attached.checked,landMin.value,landMax.value,openHouse.checked,openHouseVirtual.checked)"
+    bungalow.checked,splitLevel.checked,semiDetached.checked,newConstruction.checked,centuryHistoric.checked,moreThanOneStory.checked,detached.checked,attached.checked,tenYearsOrLess.checked,landMin.value, getLandMax(),openHouse.checked,openHouseVirtual.checked)"
     method="post">
     <label for="priceMin">Prix minimum:</label><br>
     <input type="text" id="priceMin" name="priceMin" value="1"><br>
@@ -135,9 +142,9 @@
 
       <p>Autres critères</p>
       <label for="landMin">Grandeur du terrain:</label><br>
-      <input type="text" id="landMin" name="landMin" value="1"><br>
+      <input type="text" id="landMin" name="landMin"><br>
       <label for="landMax"> à </label><br>
-      <input type="text" id="landMax" name="landMax" value="5000"><br><br>
+      <input type="text" id="landMax" name="landMax"><br><br>
       <label for="newSince"> Nouveau depuis </label><br>
       <input type="date" id="newSince" name="newSince">
       <div><input type="checkbox" id="openHouse" name="openHouse">
@@ -149,8 +156,11 @@
     
 
   </form>
-  
-
+  <div id="map"></div>
+  <script
+  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&v=weekly"
+  async
+></script>
 </body>
 
 
