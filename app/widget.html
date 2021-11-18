@@ -24,7 +24,13 @@
     }
   </script>
 </head>
+<style>
+  #map{
+    height: 80vh;
+    width: 80vw;
+  }
 
+</style>
 <body>
   <form name="filter" action="/app/js/app.js"
     onsubmit="return filterBuilding(getPriceMin(),getPriceMax(),ownershipType.value,singleFamilyHome.checked,condoApartment.checked,loftStudio.checked,intergenerational.checked,mobileHome.checked,hobbyFarm.checked,cottage.checked,lot.checked,
@@ -157,8 +163,38 @@
 
   </form>
   <div id="map"></div>
+  <script>
+  function addMakerFromAddress(address,map){
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == 'OK') {
+        console.log(results[0].geometry.location.lat());
+        
+        var marker = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(results[0].geometry.location.lat(),results[0].geometry.location.lng()),
+
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+    
+
+  function initMap(){
+    geocoder = new google.maps.Geocoder();
+    let mapOptions = {
+      center: new google.maps.LatLng('46.8139','-71.2080'),
+      zoom: 10
+    }
+    let map = new google.maps.Map(document.getElementById('map'),mapOptions);
+    addMakerFromAddress('québec city',map);
+    addMakerFromAddress('Levis,québec',map);
+    
+  }
+  </script>
   <script
-  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&v=weekly"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkPPUcQURHzRmMFmMNNzAcHRlSJAtFCgI&callback=initMap"
   async
 ></script>
 </body>
