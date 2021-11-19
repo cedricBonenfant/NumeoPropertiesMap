@@ -2,13 +2,7 @@
 var buildingArray = [];
 var buildingArrayFiltered = [];
 
-let map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
-}
+
 
 ZOHO.embeddedApp.on("PageLoad",entity => {        // This is the information about the current record, if applicable.
             console.log(entity); 
@@ -20,8 +14,7 @@ ZOHO.embeddedApp.on("PageLoad",entity => {        // This is the information abo
             var resultLoan = [];
             Promise.resolve(resultBuilding = loadAllRecords("Propri_t_s")).then(setBuildingArray);
 
-
-        }) });      
+}) });      
             // Initialize Widget Connection 
 ZOHO.embeddedApp.init();
 
@@ -38,12 +31,16 @@ function setBuildingArray(result){
     buildingArray = tempArray
     buildingArrayFiltered = buildingArray;
     console.log(buildingArray);
+    filterButton.disabled = false
 }
 
 
 
 // get all record from a specified module
+// we disable the filter button so we dont filter before all record are loaded, it enabled back after the building array are set in setBuildingArray
 async function loadAllRecords(moduleName) {
+    filterButton = document.getElementById('filterButton');
+    filterButton.disabled = true;
     var bool_more_records = true;
     var dataArray = [];
     var page = 1;
@@ -89,25 +86,45 @@ async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,c
 async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual){
     console.log('asyncfilter');
     buildingArrayFiltered = await filterOwnershipType(ownershipType);
+    console.log(buildingArrayFiltered.length)
     buildingArrayFiltered = await filterByPrice(priceMin,priceMax);
+    console.log(buildingArrayFiltered.length)
     buildingArrayFiltered = await filterPropertyType(singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot);
+    console.log(buildingArrayFiltered.length)
     await filterBedrooms(bedroomNumber);
+    console.log(buildingArrayFiltered.length)
     await filterBathrooms(bathroomNumber);
+    console.log(buildingArrayFiltered.length)
     await filterParkings(parkingNumber);
+    console.log(buildingArrayFiltered.length)
     await filterGarages(garageNumber);
+    console.log(buildingArrayFiltered.length)
     await filterPiscine(piscine);
+    console.log(buildingArrayFiltered.length)
     await filterElevator(elevator);
+    console.log(buildingArrayFiltered.length)
     await filterAdaptedMobility(adaptedMobility);
+    console.log(buildingArrayFiltered.length)
     await filterWaterfront(waterfront);
+    console.log(buildingArrayFiltered.length)
     await filterWaterfrontAccess(waterfrontAccess);
+    console.log(buildingArrayFiltered.length)
     await filterNavigable(navigable);
+    console.log(buildingArrayFiltered.length)
     await filterResort(resort);
+    console.log(buildingArrayFiltered.length)
     await filterFurnished(furnished);
+    console.log(buildingArrayFiltered.length)
     await filterSemiFurnished(semiFurnished)
+    console.log(buildingArrayFiltered.length)
     await filterBuildingCharacteristic(bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess);
+    console.log(buildingArrayFiltered.length)
     await filterLand(landMin,landMax);
+    console.log(buildingArrayFiltered.length)
     await filterOpenHouse(openHouse);
+    console.log(buildingArrayFiltered.length)
     await filterOpenHouseVirtual(openHouseVirtual);
+    console.log(buildingArrayFiltered.length)
     console.log('asyncfilter Done');
 }
 //filter building by ownership type aka to buy or to rent
@@ -662,7 +679,7 @@ async function filterLand(landMin,landMax){
             } 
         } 
     });
-    if(landMin != null || landMax != null){
+    if(landMin != 0 || landMax != 0){
         buildingArrayFiltered = tempArray;
     }
     console.log('filterLand end');
@@ -694,4 +711,8 @@ async function filterOpenHouseVirtual(openHouseVirtual){
         buildingArrayFiltered = tempArray;
     }
     console.log('filterOpenHouseVirtual end');
+}
+
+function getBuildingArray(){
+    return buildingArrayFiltered;
 }
