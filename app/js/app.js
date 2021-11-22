@@ -74,16 +74,16 @@ function filterByPrice(priceMin,priceMax){
 }
 
 // point of entry of the filter
-async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual){
+async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,duplex,triplex,quadruplex,quintuplex,landMin,landMax,openHouse,openHouseVirtual){
     console.log('filter');
     console.log(singleFamilyHome)
-    await asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual);
+    await asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,duplex,triplex,quadruplex,quintuplex,landMin,landMax,openHouse,openHouseVirtual);
     console.log('filter Done');
     console.log(buildingArrayFiltered.length);
 }
 
 // asynchronus filter ; call each filter
-async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,landMin,landMax,openHouse,openHouseVirtual){
+async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,duplex,triplex,quadruplex,quintuplex,landMin,landMax,openHouse,openHouseVirtual){
     console.log('asyncfilter');
     buildingArrayFiltered = await filterOwnershipType(ownershipType);
     console.log(buildingArrayFiltered.length)
@@ -124,6 +124,8 @@ async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,cond
     await filterOpenHouse(openHouse);
     console.log(buildingArrayFiltered.length)
     await filterOpenHouseVirtual(openHouseVirtual);
+    console.log(buildingArrayFiltered.length)
+    await filterPlex(duplex,triplex,quadruplex,quintuplex);
     console.log(buildingArrayFiltered.length)
     console.log('asyncfilter Done');
 }
@@ -715,4 +717,36 @@ async function filterOpenHouseVirtual(openHouseVirtual){
 
 function getBuildingArray(){
     return buildingArrayFiltered;
+}
+
+function filterPlex(duplex,triplex,quadruplex,quintuplex){
+    console.log('filterPlex start');
+    tempArray = [];
+    buildingArrayFiltered.forEach(building => {
+        if (duplex == true) {
+            if (building.b_timents == 'Plein-pied') {
+                tempArray.push(building);
+            }
+        }
+        if (triplex == true) {
+            if (building.b_timents == 'Paliers multiples') {
+                tempArray.push(building);
+            }
+        }
+        if (quadruplex == true) {
+            if (building.b_timents == 'Jumelé') {
+                tempArray.push(building);
+            }
+        }
+        if (quintuplex == true) {
+            if (building.b_timents == 'Nouvelle construction') {
+                tempArray.push(building);
+            }
+        }
+    });
+    if (duplex == true || triplex == true || quadruplex == true || quintuplex == true) 
+    {
+        buildingArrayFiltered = tempArray;
+    }
+    console.log('filterPlex end');
 }

@@ -143,6 +143,16 @@
         <div><input type="checkbox" id="tenYearsOrLess" name="tenYearsOrLess">
           <label for="tenYearsOrLess">10 ans ou moins</label></div>
 
+          <p>Plex</p>
+      <div><input type="checkbox" id="duplex" name="duplex">
+        <label for="duplex">Duplex</label></div>
+      <div><input type="checkbox" id="triplex" name="triplex">
+        <label for="triplex">Triplex</label></div>
+      <div><input type="checkbox" id="quadruplex" name="quadruplex">
+        <label for="quadruplex">Quadruplex</label></div>
+        <div><input type="checkbox" id="quintuplex" name="quintuplex">
+          <label for="quintuplex">Quintuplex</label></div>
+
       <p>Autres critères</p>
       <label for="landMin">Grandeur du terrain:</label><br>
       <input type="text" id="landMin" name="landMin"><br>
@@ -157,12 +167,13 @@
 
     <input type="button" value="Filtrer" id="filterButton" onclick="filterBuilding(getPriceMin(),getPriceMax(),ownershipType.value,singleFamilyHome.checked,condoApartment.checked,loftStudio.checked,intergenerational.checked,mobileHome.checked,hobbyFarm.checked,cottage.checked,lot.checked,
     bedroomNumber.value,bathroomNumber.value,parkingNumber.value,garageNumber.value,pool.checked,elevator.checked,adaptedMobility.checked,waterfront.checked,waterfrontAccess.checked,navigable.checked,resort.checked,furnished.checked,semiFurnished.checked,
-    bungalow.checked,splitLevel.checked,semiDetached.checked,newConstruction.checked,centuryHistoric.checked,moreThanOneStory.checked,detached.checked,attached.checked,tenYearsOrLess.checked,landMin.value, getLandMax(),openHouse.checked,openHouseVirtual.checked);initMap()">
+    bungalow.checked,splitLevel.checked,semiDetached.checked,newConstruction.checked,centuryHistoric.checked,moreThanOneStory.checked,detached.checked,attached.checked,tenYearsOrLess.checked,duplex.checked,triplex.checked,quadruplex.checked,quintuplex.checked,landMin.value, getLandMax(),openHouse.checked,openHouseVirtual.checked);initMap()">
     
 
   </form>
   <div id="map"></div>
   <script>
+  //used to add a mark to a map from a building. we use the building adress as a location and name as a tooltip (named title google.maps.Marker)
   function addMakerFromAddress(building,map){
     geocoder.geocode( { 'address': building.Adresse}, function(results, status) {
       if (status == 'OK') {
@@ -184,7 +195,7 @@
     });
   }
     
-
+//used to initialise the google map, we add a marker for each building loaded. the timeout serve to make sure the building array is set before loading the map
   function initMap(){
     geocoder = new google.maps.Geocoder();
     let mapOptions = {
