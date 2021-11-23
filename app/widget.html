@@ -173,15 +173,26 @@
   </form>
   <div id="map"></div>
   <script>
-  //used to add a mark to a map from a building. we use the building adress as a location and name as a tooltip (named title google.maps.Marker)
+  //used to add a mark to a map from a building. we use the building adress as a location, name as a tooltip (named title google.maps.Marker) and change to color of the marker for green(current user)
+  // blue (rest of the team) and red (centris)
   function addMakerFromAddress(building,map){
+    currentUser = getCurrentUser();
+    var icon = "blue-dot.png";
+    if (building.Owner.id == currentUser.users[0].id) {
+      icon = "green-dot.png";
+    }
+    //got to change "centris ID" to the real centris ID once we get it
+    if (building.Owner.id == "centris ID") {
+      icon = "red-dot.png";
+    }
     geocoder.geocode( { 'address': building.Adresse}, function(results, status) {
       if (status == 'OK') {
 
         var marker = new google.maps.Marker({
             map: map,
             position: new google.maps.LatLng(results[0].geometry.location.lat(),results[0].geometry.location.lng()),
-            title: building.Name
+            title: building.Name,
+            icon: icon
 
         });
         marker.addListener("click", () => {

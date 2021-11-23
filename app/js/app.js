@@ -1,24 +1,28 @@
  
 var buildingArray = [];
 var buildingArrayFiltered = [];
-
+var currentUser = [];
 
 
 ZOHO.embeddedApp.on("PageLoad",entity => {        // This is the information about the current record, if applicable.
-            console.log(entity); 
+            console.log(entity);
+            ZOHO.CRM.CONFIG.getCurrentUser().then(function(user){
+                currentUser = user;
+                console.log(currentUser);
+            }); 
             ZOHO.CRM.API.getAllRecords({Entity:"Propri_t_s"})
             .then(function(data){
             console.log(data);
             console.log(data.info.more_records);
-            var resultBuilding = [];
-            var resultLoan = [];
             Promise.resolve(resultBuilding = loadAllRecords("Propri_t_s")).then(setBuildingArray);
 
 }) });      
             // Initialize Widget Connection 
 ZOHO.embeddedApp.init();
 
-
+function getCurrentUser(){
+    return currentUser;
+}
 // Building array constructor; we take the promise result and push each building from each page from the promise to a temporary array then put tempArray into buildingArray
 function setBuildingArray(result){
     buildingArray = result
