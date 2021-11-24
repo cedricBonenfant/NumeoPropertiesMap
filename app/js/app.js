@@ -23,8 +23,17 @@ ZOHO.embeddedApp.init();
 function getCurrentUser(){
     return currentUser;
 }
+
+async function resetFilter(){
+    console.log('reset');
+    await Promise.resolve(resultBuilding = loadAllRecords("Propri_t_s")).then(setBuildingArrayReset);
+    console.log('reset done');
+    
+}
+
 // Building array constructor; we take the promise result and push each building from each page from the promise to a temporary array then put tempArray into buildingArray
 function setBuildingArray(result){
+    console.log('setBuildingArray start');
     buildingArray = result
     tempArray = [];
     buildingArray.forEach(buidingPage => {
@@ -35,8 +44,23 @@ function setBuildingArray(result){
     buildingArray = tempArray
     buildingArrayFiltered = buildingArray;
     console.log('unlock');
-    console.log(buildingArray);
     filterButton.disabled = false
+    console.log('setBuildingArray end');
+}
+
+function setBuildingArrayReset(result){
+    console.log('setBuildingArrayReset start');
+    tempArray = [];
+    result.forEach(buidingPage => {
+        (buidingPage.data).forEach(building => {
+            tempArray.push(building);
+        });
+    });
+    buildingArray = tempArray
+    console.log('unlock');
+    filterButton.disabled = false
+    console.log('setBuildingArrayReset end');
+    return buildingArray;
 }
 
 
@@ -79,16 +103,17 @@ function filterByPrice(priceMin,priceMax){
 }
 
 // point of entry of the filter
-async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,duplex,triplex,quadruplex,quintuplex,landMin,landMax,openHouse,openHouseVirtual,foreclosure){
+async function filterBuilding(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,duplex,triplex,quadruplex,quintuplex,landMin,landMax,openHouse,openHouseVirtual,foreclosure,creationDate){
     console.log('filter');
-    console.log(singleFamilyHome)
-    await asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,duplex,triplex,quadruplex,quintuplex,landMin,landMax,openHouse,openHouseVirtual,foreclosure);
+    buildingArrayFiltered = await Promise.resolve(resetFilter());
+    await Promise.resolve(asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,duplex,triplex,quadruplex,quintuplex,landMin,landMax,openHouse,openHouseVirtual,foreclosure,creationDate));
     console.log('filter Done');
     console.log(buildingArrayFiltered.length);
 }
 
 // asynchronus filter ; call each filter
-async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,duplex,triplex,quadruplex,quintuplex,landMin,landMax,openHouse,openHouseVirtual,foreclosure){
+async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,condoApartment,loftStudio,intergenerational,mobileHome,hobbyFarm,cottage,lot,bedroomNumber,bathroomNumber,parkingNumber,garageNumber,piscine,elevator,adaptedMobility,waterfront,waterfrontAccess,navigable,resort,furnished,semiFurnished,bungalow,splitLevel,semiDetached,newConstruction,centuryHistoric,moreThanOneStory,detached,attached,tenYearsOrLess,duplex,triplex,quadruplex,quintuplex,landMin,landMax,openHouse,openHouseVirtual,foreclosure,creationDate){
+
     console.log('asyncfilter');
     buildingArrayFiltered = await filterOwnershipType(ownershipType);
     console.log(buildingArrayFiltered.length)
@@ -134,13 +159,16 @@ async function asyncFilter(priceMin,priceMax,ownershipType,singleFamilyHome,cond
     console.log(buildingArrayFiltered.length)
     await filterForeclosure(foreclosure);
     console.log(buildingArrayFiltered.length)
+    await filterCreationDate(creationDate);
+    console.log(buildingArrayFiltered.length)
     console.log('asyncfilter Done');
+
 }
 //filter building by ownership type aka to buy or to rent
 async function filterOwnershipType(ownershipType){
     console.log('filterOwnershipType start');
     tempArray = [];
-    buildingArrayFiltered.forEach(building => {
+    buildingArray.forEach(building => {
             if (building.vente_location == 'Location' && ownershipType == 'rent') {
                 tempArray.push(building);
             }
@@ -149,10 +177,10 @@ async function filterOwnershipType(ownershipType){
             }
 
     });
+
     buildingArrayFiltered = tempArray;
     console.log('filterOwnershipType Done');
 
-    //return tempArray
     return buildingArrayFiltered
 }
 
@@ -160,9 +188,7 @@ async function filterPropertyType(singleFamilyHome,condoApartment,loftStudio,int
     
     console.log('filterPropertyType start');
     tempArray = [];
-    
     buildingArrayFiltered.forEach(building => {
-    console.log(building.Type_de_propi_t);
     if (building.Type_de_propi_t != null) {
         switch (building.Type_de_propi_t) {
            case 'Maison unifamiliale':
@@ -770,4 +796,18 @@ async function filterForeclosure(foreclosure){
         buildingArrayFiltered = tempArray;
     }
     console.log('filterForeclosure end');
+}
+
+async function filterCreationDate(creationDate){
+    console.log('filterCreationDate start');
+    tempArray=[];
+    if (creationDate != null) {
+        buildingArrayFiltered.forEach(building => {
+            if (building.Created_Time >= creationDate) {
+                tempArray.push(building);
+            }
+        });
+        buildingArrayFiltered = tempArray;
+    }
+    console.log('filterCreationDate end');
 }

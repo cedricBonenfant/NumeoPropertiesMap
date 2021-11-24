@@ -169,12 +169,13 @@
 
     <input type="button" value="Filtrer" id="filterButton" onclick="filterBuilding(getPriceMin(),getPriceMax(),ownershipType.value,singleFamilyHome.checked,condoApartment.checked,loftStudio.checked,intergenerational.checked,mobileHome.checked,hobbyFarm.checked,cottage.checked,lot.checked,
     bedroomNumber.value,bathroomNumber.value,parkingNumber.value,garageNumber.value,pool.checked,elevator.checked,adaptedMobility.checked,waterfront.checked,waterfrontAccess.checked,navigable.checked,resort.checked,furnished.checked,semiFurnished.checked,
-    bungalow.checked,splitLevel.checked,semiDetached.checked,newConstruction.checked,centuryHistoric.checked,moreThanOneStory.checked,detached.checked,attached.checked,tenYearsOrLess.checked,duplex.checked,triplex.checked,quadruplex.checked,quintuplex.checked,landMin.value, getLandMax(),openHouse.checked,openHouseVirtual.checked,foreclosure.checked);initMap();setBuildingArray(loadAllRecords('Propri_t_s'));">
+    bungalow.checked,splitLevel.checked,semiDetached.checked,newConstruction.checked,centuryHistoric.checked,moreThanOneStory.checked,detached.checked,attached.checked,tenYearsOrLess.checked,duplex.checked,triplex.checked,quadruplex.checked,quintuplex.checked,landMin.value, getLandMax(),openHouse.checked,openHouseVirtual.checked,foreclosure.checked,newSince.value);initMap();">
     
 
   </form>
   <div id="map"></div>
   <script>
+
   //used to add a mark to a map from a building. we use the building adress as a location, name as a tooltip (named title google.maps.Marker) and change to color of the marker for green(current user)
   // blue (rest of the team) and red (centris)
   function addMakerFromAddress(building,map){
@@ -224,7 +225,7 @@
       });
     }, 2000);
 
-    
+   
   }
   </script>
   <script id="map"
